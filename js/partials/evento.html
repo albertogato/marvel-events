@@ -1,0 +1,63 @@
+<article id="evento">
+	<div class="row">
+		<div class="spinner col-md-12" ng-show="cargando"></div>
+		
+		<div class="col-md-6 col-sm-6 col-xs-12">
+			<div class="imagen is-loading" id="imagen_evento">
+				<img class="img-responsive" src="{{ evento.thumbnail.path }}.{{ evento.thumbnail.extension }}" alt="{{ evento.title }}" />
+			</div>
+		</div>
+
+		<div class="col-md-6 col-sm-6 col-xs-12" ng-show="!cargando">
+			<h1>{{ evento.title }}</h1>
+			<hr />
+			<p>{{ evento.start.substr(0, 4) }}</p>
+			<p>{{ evento.description }}</p>
+			<div id="creadores" ng-show="evento.creators.items.length > 0">
+				<h2>Creators</h2>
+				<hr />
+				<ul class="lista_plana">
+					<li ng-repeat="creador in evento.creators.items">{{ creador.name }}</li>
+				</ul>
+			</div>
+			<div id="personajes" ng-show="evento.characters.items.length > 0">
+				<h2>Characters</h2>
+				<hr />
+				<ul class="lista_plana">
+					<li ng-repeat="personaje in evento.characters.items">{{ personaje.name }}</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h2 ng-show="hayComics">Comics</h2>
+			<hr />
+			<ul id="lista_comics" class="clearfix" infinite-scroll="cargaComics()" infinite-scroll-disabled="cargandoComics">
+				<li class="comic col-md-3 col-sm-4 col-xs-6" ng-repeat="comic in comics">
+					<div class="titulo"><a ng-attr-href="{{ (comic.urls.length > 0 ? comic.urls[0].url : '#/comic/' + comic.id) }}">{{ comic.title }}</a></div>
+					<a ng-attr-href="{{ '#/comic/' + comic.id }}">
+						<div class="imagen is-loading">
+							<img class="img-responsive" ng-attr-src="{{ comic.thumbnail.path }}/portrait_fantastic.{{ comic.thumbnail.extension }}" ng-attr-alt="{{ comic.title }}" />
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div class="spinner col-md-12" ng-show="cargandoComics"></div>
+	</div>
+</article>
+
+<script>
+	function actualizaImagenesCargadasComics() {
+		$('#lista_comics').imagesLoaded().progress(function(imgLoad, image) {
+			var $item = $( image.img ).parent();
+			$item.removeClass('is-loading');
+			if(!image.isLoaded) {
+				$item.addClass('is-broken');
+			}
+		});
+	}
+	var intervaloActualizacionImagenesCargadasComics = setInterval(actualizaImagenesCargadasComics, 250);
+</script>

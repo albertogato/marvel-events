@@ -1,0 +1,21 @@
+{
+  "name": "marvel",
+  "version": "1.0.0",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "*",
+    "bootstrap": "*",
+    "angular": "~1.4.1",
+    "angular-route": "*",
+    "angular-animate": "*",
+    "ngInfiniteScroll": "*",
+    "images-loaded": "*"
+  }
+}

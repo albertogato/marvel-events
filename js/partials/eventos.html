@@ -1,0 +1,33 @@
+<article id="eventos">
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h2>Events</h2>
+			<hr />
+		</div>
+		<ul id="lista_eventos" class="clearfix" infinite-scroll="cargaEventos()" infinite-scroll-disabled="cargando">
+			<li class="evento col-md-3 col-sm-6 col-xs-12" ng-repeat="evento in eventos">
+				<a ng-attr-href="#/evento/{{ evento.id }}" ng-click="verEvento(evento)">
+					<div class="imagen is-loading">
+						<img class="img-responsive" ng-attr-src="{{ evento.thumbnail.path }}/standard_fantastic.{{ evento.thumbnail.extension }}" ng-attr-alt="{{ evento.title }}" />
+					</div>
+					<div class="info" ng-show="evento.start.substr(0, 4)">{{ evento.start | fecha }} - {{ evento.end | fecha }}</div>
+				</a>
+			</li>
+		</ul>
+
+		<div class="spinner col-md-12" ng-show="cargando"></div>
+	</div>
+</article>
+
+<script>
+	function actualizaImagenesCargadasEventos() {
+		$('#lista_eventos').imagesLoaded().progress(function(imgLoad, image) {
+			var $item = $( image.img ).parent();
+			$item.removeClass('is-loading');
+			if(!image.isLoaded) {
+				$item.addClass('is-broken');
+			}
+		});
+	}
+	var intervaloActualizacionImagenesCargadasEventos = setInterval(actualizaImagenesCargadasEventos, 250);
+</script>

@@ -1,0 +1,17 @@
+<article id="comic">
+	<div class="row">
+		<div class="spinner col-md-12" ng-show="cargando"></div>
+
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h1>{{ comic.title }}</h1>
+		</div>
+		
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<a ng-attr-href="{{ (comic.urls.length > 0 ? comic.urls[0].url : '#/comic/' + comic.id) }}">
+				<div class="imagen is-loading">
+					<img class="img-responsive" ng-attr-src="{{ comic.thumbnail.path }}.{{ comic.thumbnail.extension }}" ng-attr-alt="{{ comic.title }}" />
+				</div>
+			</a>
+		</div>
+	</div>
+</article>

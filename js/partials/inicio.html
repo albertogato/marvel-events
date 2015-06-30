@@ -1,0 +1,89 @@
+<article id="inicio">
+	<div class="row">
+		<div id="evento_destacado">
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<h2>Featured event</h2>
+				<hr />
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12" ng-show="!cargandoEventos">
+				<a href="#/evento/{{ eventoDestacado.id }}">
+					<div class="imagen is-loading">
+						<img class="img-responsive" ng-attr-src="{{ eventoDestacado.thumbnail.path }}/landscape_incredible.{{ eventoDestacado.thumbnail.extension }}" ng-attr-alt="{{ eventoDestacado.title }}" />
+					</div>
+				</a>
+			</div>
+			<div class="col-md-6 col-sm-6 col-xs-12" ng-show="!cargandoEventos">
+				<h3>{{ eventoDestacado.title }}</h3>
+				<hr />
+				<p>{{ eventoDestacado.start.substr(0, 4) }}</p>
+				<p>{{ eventoDestacado.description }}</p>
+				<p>
+					<a class="btn btn-default btn-lg" href="#/evento/{{ eventoDestacado.id }}" role="button">More info</a>
+					<a class="btn btn-primary btn-lg" href="#/eventos" role="button">View more events</a>
+				</p>
+			</div>
+		</div>
+		<div class="spinner col-md-12" ng-show="cargandoEventos"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h2>Recent events</h2>
+			<hr />
+		</div>
+		<ul id="lista_eventos" class="clearfix">
+			<li class="evento col-md-3 col-sm-6 col-xs-12" ng-repeat="evento in eventosRecientes"> <!-- ng-click="verEvento()" -->
+				<a ng-attr-href="#/evento/{{ evento.id }}" ng-click="verEvento(evento)">
+					<div class="imagen is-loading">
+						<img class="img-responsive" ng-attr-src="{{ evento.thumbnail.path }}/standard_fantastic.{{ evento.thumbnail.extension }}" ng-attr-alt="{{ evento.title }}" />
+					</div>
+					<div class="info" ng-show="evento.start.substr(0, 4)">{{ evento.start | fecha }} - {{ evento.end | fecha }}</div>
+				</a>
+			</li>
+		</ul>
+		<div class="spinner col-md-12" ng-show="cargandoEventos"></div>
+		<div class="col-md-12 col-sm-12 col-xs-12" ng-show="!cargando">
+			<p><a class="btn btn-primary btn-lg" href="#/eventos" role="button">View more events</a></p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+			<h2>Recent comics</h2>
+			<hr />
+			<ul id="lista_comics" class="clearfix">
+				<li class="comic col-md-3 col-sm-4 col-xs-6" ng-repeat="comic in comicsRecientes">
+					<div class="titulo"><a ng-attr-href="{{ (comic.urls.length > 0 ? comic.urls[0].url : '#/comic/' + comic.id) }}">{{ comic.title }}</a></div>
+					<a ng-attr-href="{{ '#/comic/' + comic.id }}">
+						<div class="imagen is-loading">
+							<img class="img-responsive" ng-attr-src="{{ comic.thumbnail.path }}/portrait_fantastic.{{ comic.thumbnail.extension }}" ng-attr-alt="{{ comic.title }}" />
+						</div>
+					</a>
+				</li>
+			</ul>
+			<div class="spinner col-md-12" ng-show="cargandoComics"></div>
+		</div>
+	</div>
+</article>
+
+<script>
+	function actualizaImagenesCargadasEventos() {
+		$('#lista_eventos').imagesLoaded().progress(function(imgLoad, image) {
+			var $item = $( image.img ).parent();
+			$item.removeClass('is-loading');
+			if(!image.isLoaded) {
+				$item.addClass('is-broken');
+			}
+		});
+	}
+	var intervaloActualizacionImagenesCargadasEventos = setInterval(actualizaImagenesCargadasEventos, 250);
+
+	function actualizaImagenesCargadasComics() {
+		$('#lista_comics').imagesLoaded().progress(function(imgLoad, image) {
+			var $item = $( image.img ).parent();
+			$item.removeClass('is-loading');
+			if(!image.isLoaded) {
+				$item.addClass('is-broken');
+			}
+		});
+	}
+	var intervaloActualizacionImagenesCargadasComics = setInterval(actualizaImagenesCargadasComics, 250);
+</script>

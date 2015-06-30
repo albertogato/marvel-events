@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="marvelApp">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Marvel events</title>
+		<meta name="description" content="Marvel events (tinkering with the Marvel API and some AngujarJS :)">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
+
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/main.css?v=1.0">
+	</head>
+	<body>
+		<div class="container">
+
+			<header>
+				<div class="page-header clearfix">
+		  			<h1 class="pull-left"><a href="#/">Marvel events</a> <small>(tinkering with the Marvel API and some AngujarJS :)</small></h1>
+		  			<div class="pull-right" id="made_by">
+		  				made by <a href="http://www.maisquedeseno.com">Máis Que Deseño <img src="img/logo_mqd.png"></a>
+		  				<a href="http://www.maisquedeseno.com/servicios/diseno-web" id="bocadillo">¿Necesitas servicios de desarrollo?</a>
+		  			</div>
+				</div>
+			</header>
+
+			<div ng-view="" autoscroll="true" class="at-view-fade-in at-view-fade-out" style="position: relative;"></div>
+
+			<footer>
+				<div class="row">
+					<div class="col-md-12 col-sm-12 col-xs-12">
+						<p>Data provided by Marvel. © 2014 Marvel</p>
+					</div>
+				</div>
+			</footer>
+			
+		</div> <!-- /container -->
+
+
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="bower_components/angular-animate/angular-animate.min.js"></script>
+		<script src="bower_components/angular-route/angular-route.min.js"></script>
+		<script src='bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js'></script>
+		<script src="bower_components/images-loaded/imagesloaded.pkgd.min.js"></script>
+
+		<script src="js/app.js"></script>
+		<script src="js/services/marvel_api.js"></script>
+		<script src="js/controllers/inicio.js"></script>
+		<script src="js/controllers/eventos.js"></script>
+		<script src="js/controllers/evento.js"></script>
+		<script src="js/controllers/comic.js"></script>
+	</body>
+</html>
